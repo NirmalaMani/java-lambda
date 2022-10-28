@@ -58,10 +58,10 @@ pipeline {
                     sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY"
                     sh "aws configure set aws_secret_access_key $AWS_SECRET_KEY"
                     sh 'aws configure set region us-east-1' 
-                    sh "aws s3 cp target/${JARNAME} s3://bermtec228/lambda-test/"
+                    sh "aws s3 cp target/${JARNAME} s3://lambda-tstbucket/lambda-test/"
 
 
-                    sh "aws lambda update-function-code --function-name test  --zip-file fileb://target/${JARNAME}"
+                    sh "aws lambda update-function-code --function-name testfunction  --zip-file fileb://target/${JARNAME}"
 
                 }          
             }
@@ -94,10 +94,10 @@ pipeline {
                         echo "VERSION: ${VERSION}"
                         JARNAME = ARTIFACTID+'-'+VERSION+'.jar'
 
-                        sh "aws s3 cp target/${JARNAME} s3://bermtec228/lambda-prod/"
+                        sh "aws s3 cp target/${JARNAME} s3://lambda-tstbucket/lambda-prod/"
                         //  sh './deploy-test.sh $AWS_ACCESS_KEY $AWS_SECRET_KEY'
                         // if (does_lambda_exist('prodfunction')) {
-                            sh "aws lambda update-function-code --function-name prodfunction --s3-bucket bermtec228 --s3-key lambda-prod/${JARNAME}"
+                            sh "aws lambda update-function-code --function-name prodfunction --s3-bucket lambda-tstbucket --s3-key lambda-prod/${JARNAME}"
                         //}  
                     }
                 }
