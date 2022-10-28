@@ -115,7 +115,7 @@ def does_lambda_exist(String name) {
     isexist=true
   }
   catch(Exception e) {
-    echo 'Failed'
+    echo 'build Failed'
     isexist=true
   }
   return isexist
